@@ -27,14 +27,16 @@ public class PhoneManagerView {
                     addPhone();
                     break;
                 case 2:
+                    deletePhone();
                     break;
                 case 3:
                     displayPhoneList();
                     break;
                 case 4:
+                    findPhone();
                     break;
                 case 5:
-                    break;
+                    return;
                 default:
                     System.out.println("##### Lựa chọn không hợp lệ #####");
                     break;
@@ -45,12 +47,13 @@ public class PhoneManagerView {
     public void addPhone() {
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        boolean out = false;
+        while (!out) {
             System.out.println("    --- Thêm điện thoại ---");
             System.out.println("1. Thêm điện thoại xách tay");
             System.out.println("2. Thêm điện thoại chính hãng");
             System.out.println("3. Quay lại");
-            System.out.println("Chọn: ");
+            System.out.print("Chọn: ");
 
             int choice = scanner.nextInt();
             switch (choice) {
@@ -126,6 +129,9 @@ public class PhoneManagerView {
                         continue;
                     }
                     break;
+                case 3:
+                    out = true;
+                    break;
                 default:
                     System.out.println("##### Lựa chọn không hợp lệ #####");
                     break;
@@ -136,15 +142,31 @@ public class PhoneManagerView {
 
     public void deletePhone() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("    --- Xóa điện thoại ---");
+        System.out.println("Nhập id điện thoại muốn xóa");
+        System.out.print("Chọn: ");
+        int id = scanner.nextInt();
 
-        while (true) {
-            System.out.println("    --- Xóa điện thoại ---");
-            System.out.println("Nhập id điện thoại muốn xóa");
-            System.out.print("Chọn: ");
-            int id = scanner.nextInt();
+        Phone target = PhoneManager.findPhoneById(id);
+        if (target == null) System.out.println("Không tìm thấy điện thoại");
+        else {
+            PhoneManager.removePhone(target);
+            System.out.println("Xóa thành công");
+        }
+    }
 
-            Phone target = PhoneManager.findPhoneById(id);
-            if (target == null) System.out.println("Không tìm thấy điện thoại");
+    public void findPhone() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("    --- Tìm kiếm điện thoại ---");
+        System.out.println("Nhập id điện thoại muốn tìm");
+        System.out.print("Chọn: ");
+        int id = scanner.nextInt();
+
+        Phone target = PhoneManager.findPhoneById(id);
+        if (target == null) System.out.println("Không tìm thấy điện thoại");
+        else {
+            System.out.println("Điện thoại muốn tìm: ");
+            System.out.println(target);
         }
     }
 
