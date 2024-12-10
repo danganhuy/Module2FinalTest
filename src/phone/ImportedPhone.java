@@ -1,4 +1,4 @@
-package dienThoai;
+package phone;
 
 public class ImportedPhone extends Phone {
     private String country;

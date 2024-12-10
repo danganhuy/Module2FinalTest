@@ -1,4 +1,4 @@
-package dienThoai;
+package phone;
 
 public abstract class Phone {
     private int id;

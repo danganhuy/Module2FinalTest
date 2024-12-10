@@ -1,4 +1,4 @@
-package dienThoai;
+package phone;
 
 public class OfficalPhone extends Phone {
     private int warrantyDuration;
