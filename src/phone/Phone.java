@@ -10,8 +10,8 @@ public abstract class Phone {
     public Phone(int id, String name, double price, int quantity, String producer) {
         this.id = id;
         this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+        setPrice(price);
+        setQuantity(quantity);
         this.producer = producer;
     }
 
@@ -35,7 +35,10 @@ public abstract class Phone {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double price) throws IllegalArgumentException {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
         this.price = price;
     }
 
@@ -43,7 +46,10 @@ public abstract class Phone {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(int quantity) throws IllegalArgumentException {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
         this.quantity = quantity;
     }
 
@@ -56,13 +62,5 @@ public abstract class Phone {
     }
 
     @Override
-    public String toString() {
-        return "DienThoai{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", producer='" + producer + '\'' +
-                '}';
-    }
+    public abstract String toString();
 }

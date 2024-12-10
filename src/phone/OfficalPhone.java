@@ -8,11 +8,17 @@ public class OfficalPhone extends Phone {
                         int quantity, String producer,
                         int warrantyDuration, String warrantyCoverage) {
         super(id, name, price, quantity, producer);
-        this.warrantyDuration = warrantyDuration;
-        this.warrantyCoverage = warrantyCoverage;
+        setWarrantyDuration(warrantyDuration);
+        setWarrantyCoverage(warrantyCoverage);
     }
 
-    public int getWarrantyDuration() {
+    public int getWarrantyDuration() throws IllegalArgumentException {
+        if (warrantyDuration < 0) {
+            throw new IllegalArgumentException("Warranty duration cannot be negative");
+        }
+        if (warrantyDuration > 730) {
+            throw new IllegalArgumentException("Warranty duration cannot be greater than 730 days (2 years)");
+        }
         return warrantyDuration;
     }
 
@@ -25,14 +31,16 @@ public class OfficalPhone extends Phone {
     }
 
     public void setWarrantyCoverage(String warrantyCoverage) {
+        if (!warrantyCoverage.equals("Quoc te") && !warrantyCoverage.equals("Toan quoc")) {
+            throw new IllegalArgumentException("Warranty coverage have to be \"Quoc te\" or \"Toan quoc\"");
+        }
         this.warrantyCoverage = warrantyCoverage;
     }
 
     @Override
     public String toString() {
-        return "DienThoaiChinhHang{" +
-                "warrantyDuration=" + warrantyDuration +
-                ", warrantyCoverage='" + warrantyCoverage + '\'' +
-                '}';
+        return super.getId() +"," + super.getName() +"," + super.getPrice() +
+                "," + super.getQuantity() +"," + super.getProducer() +
+                "," + warrantyDuration +"," + warrantyCoverage;
     }
 }
